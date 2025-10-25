@@ -1,20 +1,17 @@
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace AudioRecognitionApp.Services
 {
     public class LyricsService : ILyricsService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IConfiguration _configuration;
         private readonly ILogger<LyricsService> _logger;
 
         public LyricsService(
             IHttpClientFactory httpClientFactory,
-            IConfiguration configuration,
             ILogger<LyricsService> logger)
         {
             _httpClientFactory = httpClientFactory;
-            _configuration = configuration;
             _logger = logger;
         }
 
@@ -22,47 +19,95 @@ namespace AudioRecognitionApp.Services
         {
             try
             {
-                var apiKey = _configuration["ApiSettings:GeniusApiKey"];
-
-                if (string.IsNullOrEmpty(apiKey) || apiKey == "YOUR_GENIUS_API_KEY_HERE")
+                if (string.IsNullOrEmpty(songTitle) || string.IsNullOrEmpty(artistName))
                 {
-                    _logger.LogWarning("Genius API Key no configurada.");
-                    return "Letras no disponibles. Configure su API key de Genius en appsettings.json.";
+                    _logger.LogWarning("Título o artista no proporcionados.");
+                    return "Información insuficiente para buscar letras.";
                 }
 
                 var client = _httpClientFactory.CreateClient();
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+                client.Timeout = TimeSpan.FromSeconds(10);
 
-                var searchQuery = Uri.EscapeDataString($"{songTitle} {artistName}");
-                var searchUrl = $"https://api.genius.com/search?q={searchQuery}";
+                var cleanArtist = Uri.EscapeDataString(artistName.Trim());
+                var cleanTitle = Uri.EscapeDataString(songTitle.Trim());
 
-                var response = await client.GetAsync(searchUrl);
+                var lyrics = await TryGetLyricsFromMultipleSources(client, cleanArtist, cleanTitle, songTitle, artistName);
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    _logger.LogError($"Error al buscar en Genius API: {response.StatusCode}");
-                    return null;
-                }
-
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var result = JObject.Parse(jsonResponse);
-
-                var hits = result["response"]?["hits"];
-                if (hits != null && hits.Any())
-                {
-                    var firstHit = hits.First();
-                    var songUrl = firstHit["result"]?["url"]?.ToString();
-
-                    return $"Ver letras en: {songUrl}";
-                }
-
-                return "Letras no encontradas.";
+                return lyrics ?? "Letras no encontradas para esta canción.";
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al obtener letras");
-                return null;
+                return "Error al obtener las letras. Por favor, intente nuevamente.";
             }
+        }
+
+        private async Task<string?> TryGetLyricsFromMultipleSources(
+            HttpClient client,
+            string cleanArtist,
+            string cleanTitle,
+            string originalTitle,
+            string originalArtist)
+        {
+            try
+            {
+                _logger.LogInformation($"Intentando Lyrics.ovh para {originalArtist} - {originalTitle}");
+                var lyricsOvhUrl = $"https://api.lyrics.ovh/v1/{cleanArtist}/{cleanTitle}";
+
+                var response = await client.GetAsync(lyricsOvhUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    using var doc = JsonDocument.Parse(content);
+
+                    if (doc.RootElement.TryGetProperty("lyrics", out var lyricsElement))
+                    {
+                        var lyrics = lyricsElement.GetString();
+                        if (!string.IsNullOrWhiteSpace(lyrics))
+                        {
+                            _logger.LogInformation("Letras encontradas en Lyrics.ovh");
+                            return lyrics.Trim();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Lyrics.ovh no disponible, probando alternativa");
+            }
+
+            try
+            {
+                _logger.LogInformation($"Intentando API alternativa para {originalArtist} - {originalTitle}");
+
+                var canaradoUrl = $"https://lyrist.vercel.app/api/{cleanArtist}/{cleanTitle}";
+
+                var response = await client.GetAsync(canaradoUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    using var doc = JsonDocument.Parse(content);
+
+                    if (doc.RootElement.TryGetProperty("lyrics", out var lyricsElement))
+                    {
+                        var lyrics = lyricsElement.GetString();
+                        if (!string.IsNullOrWhiteSpace(lyrics))
+                        {
+                            _logger.LogInformation("Letras encontradas en API alternativa");
+                            return lyrics.Trim();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "API alternativa no disponible");
+            }
+
+            _logger.LogWarning("No se pudieron obtener letras de ninguna fuente");
+            return $"Letras no encontradas para:\n{originalArtist} - {originalTitle}\n\nPuedes buscarlas manualmente en:\nhttps://www.google.com/search?q={cleanArtist}+{cleanTitle}+lyrics";
         }
     }
 }
