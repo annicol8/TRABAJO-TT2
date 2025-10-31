@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\clara\\source\\repos\\TRABAJO-TT2\\project\\AudioRecognitionApp.csproj": {}
+    "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\AudioRecognitionApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\clara\\source\\repos\\TRABAJO-TT2\\project\\AudioRecognitionApp.csproj": {
+    "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\AudioRecognitionApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\clara\\source\\repos\\TRABAJO-TT2\\project\\AudioRecognitionApp.csproj",
+        "projectUniqueName": "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\AudioRecognitionApp.csproj",
         "projectName": "AudioRecognitionApp",
-        "projectPath": "C:\\Users\\clara\\source\\repos\\TRABAJO-TT2\\project\\AudioRecognitionApp.csproj",
-        "packagesPath": "C:\\Users\\clara\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\clara\\source\\repos\\TRABAJO-TT2\\project\\obj\\",
+        "projectPath": "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\AudioRecognitionApp.csproj",
+        "packagesPath": "C:\\Users\\anani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\clara\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anani\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

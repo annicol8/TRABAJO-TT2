@@ -1,7 +1,16 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\clara\\source\\repos\\TRABAJO-TT2\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\anani\\source\\repos\\TRABAJO-TT2-public\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{34B7138E-98A0-E7D2-FBD4-AC9CB009CDF2}|project\\AudioRecognitionApp.csproj|c:\\users\\anani\\source\\repos\\trabajo-tt2-public\\project\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{34B7138E-98A0-E7D2-FBD4-AC9CB009CDF2}|project\\AudioRecognitionApp.csproj|solutionrelative:project\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B7138E-98A0-E7D2-FBD4-AC9CB009CDF2}|project\\AudioRecognitionApp.csproj|c:\\users\\anani\\source\\repos\\trabajo-tt2-public\\project\\audiorecognitionapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{34B7138E-98A0-E7D2-FBD4-AC9CB009CDF2}|project\\AudioRecognitionApp.csproj|solutionrelative:project\\audiorecognitionapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +18,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\anani\\source\\repos\\TRABAJO-TT2-public\\project\\appsettings.json",
+              "RelativeDocumentMoniker": "project\\appsettings.json",
+              "ToolTip": "C:\\Users\\anani\\source\\repos\\TRABAJO-TT2-public\\project\\appsettings.json",
+              "RelativeToolTip": "project\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-31T15:32:43.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AudioRecognitionApp",
+              "DocumentMoniker": "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\AudioRecognitionApp.csproj",
+              "RelativeDocumentMoniker": "project\\AudioRecognitionApp.csproj",
+              "ToolTip": "C:\\Users\\anani\\Source\\Repos\\TRABAJO-TT2-public\\project\\AudioRecognitionApp.csproj",
+              "RelativeToolTip": "project\\AudioRecognitionApp.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-31T15:32:34.489Z",
+              "EditorCaption": ""
             }
           ]
         }
