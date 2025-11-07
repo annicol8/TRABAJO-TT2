@@ -57,15 +57,23 @@ namespace AudioRecognitionApp.Services
                 {
                     var songData = result["result"];
 
+                    var title = songData["title"]?.ToString() ?? "Desconocido";
+                    var artist = songData["artist"]?.ToString() ?? "Desconocido";
+                    var album = songData["album"]?.ToString() ?? "Desconocido";
+
+                    var searchQuery = $"{artist} {title} {album} CD";
+                    var amazonUrl = $"https://www.amazon.com/s?k={Uri.EscapeDataString(searchQuery)}";
+
                     return new SongInfo
                     {
-                        Title = songData["title"]?.ToString() ?? "Desconocido",
-                        Artist = songData["artist"]?.ToString() ?? "Desconocido",
-                        Album = songData["album"]?.ToString() ?? "Desconocido",
+                        Title = title,
+                        Artist = artist,
+                        Album = album,
                         ReleaseDate = songData["release_date"]?.ToString() ?? "",
                         Label = songData["label"]?.ToString() ?? "",
                         SpotifyUrl = songData["spotify"]?["external_urls"]?["spotify"]?.ToString() ?? "",
                         AppleMusicUrl = songData["apple_music"]?["url"]?.ToString() ?? "",
+                        AmazonUrl = amazonUrl,
                         CoverArtUrl = songData["spotify"]?["album"]?["images"]?[0]?["url"]?.ToString() ?? ""
                     };
                 }
